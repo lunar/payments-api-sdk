@@ -34,18 +34,18 @@ class PaymentsTest extends BaseTest
 					"code" => "valid",
 					"status" => "valid",
 					"limit" => [
-						"decimal" => "399.95",
-						"currency" => "EUR"
+						"decimal" => "500",
+						"currency" => "DKK"
 					],
 					"balance" => [
-						"decimal" => "399.95",
-						"currency" => "EUR"
+						"decimal" => "500",
+						"currency" => "DKK"
 					]
 				],
 				"fingerprint" => "success",
 				"tds" => array(
 					"fingerprint" => "success",
-					"challenge" => false,
+					"challenge" => true,
 					"status" => "authenticated"
 				),
 			],
@@ -53,17 +53,17 @@ class PaymentsTest extends BaseTest
 				'key' => $this->public_key,
 			],
 			'amount' => array(
-				'currency' => 'EUR',
-				'decimal' => '399.95'
+				'currency' => 'DKK',
+				'decimal' => '20.50'
 			),
 			'custom' => array(
 				'source' => 'php client test'
 			),
 			'mobilePayConfiguration' => array(
 				'configurationID' => '00000000000000000000000000000000',
-				'logo' => 'https://lunar.app/logo.img',
-				'returnUrl' => 'https://payments.lunar.app/pay?referenceId={paymentId}&redirectUrl=https://webshop.dk',
+				'logo' => 'https://lunar.app/logo.img'
 			),
+			'redirectUrl' => 'https://google.com'
 		));
 
 		$this->assertNotEmpty($new_payment_id, 'primary key');
@@ -85,12 +85,14 @@ class PaymentsTest extends BaseTest
 	{
 
 		$payment_id = $this->payments->put($this->payment_id, [
-			'mobilePay' => true
+			'mobilePay' => [
+				'returnUrl' => 'https://payments.lunar.app/pay?referenceId={paymentId}&redirectUrl=https://webshop.dk',
+			]
 		]);
 
 		$payment = $this->payments->fetch($payment_id);
 
-		$this->assertEquals('mobilePay', $payment['paymentMethodSelection']);
+		$this->assertEquals('mobilePay', $payment['selectedPaymentMethod']);
 	}
 
 	public function testIntent()
@@ -106,7 +108,9 @@ class PaymentsTest extends BaseTest
 		$payment_id = $this->getNewPaymentId();
 
 		$payment = $this->payments->submit($payment_id, [
-			'mobilePay' => true
+			'mobilePay' => [
+				'returnUrl' => 'https://payments.lunar.app/pay?referenceId={paymentId}&redirectUrl=https://webshop.dk',
+			]
 		]);
 
 		$this->assertArrayHasKey('challenges', $payment);
@@ -176,9 +180,11 @@ class PaymentsTest extends BaseTest
 	{
 		$payment_id = $this->getNewPaymentId();
 
-		$payment = $this->payments->submit($payment_id, ["PaymentMethod" => [
-			'mobilePay' => true
-		]]);
+		$payment = $this->payments->submit($payment_id, [
+			'mobilePay' => [
+				'returnUrl' => 'https://payments.lunar.app/pay?referenceId={paymentId}&redirectUrl=https://webshop.dk',
+			]
+		]);
 
 		return $payment['challenges'];
 
@@ -220,8 +226,7 @@ class PaymentsTest extends BaseTest
 				),
 				'mobilePayConfiguration' => array(
 					'configurationID' => '00000000000000000000000000000000',
-					'logo' => 'https://lunar.app/logo.img',
-					'returnUrl' => 'https://payments.lunar.app/pay?referenceId={paymentId}&redirectUrl=https://webshop.dk',
+					'logo' => 'https://lunar.app/logo.img'
 				)
 			)
 		);

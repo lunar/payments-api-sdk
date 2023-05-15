@@ -20,7 +20,7 @@ abstract class BaseTest extends TestCase
 	{
 		$this->lunar        = new Lunar("a61437c5-1043-443b-ac3a-fe49c2b58481");
 		$this->public_key		 = "5fb82649-fe30-4e63-985e-2cf48e925291";
-		$this->payment_id = "d4faf07e-01c7-4906-9058-53d8541782c3";
+		$this->payment_id = "80cb751b-12cd-5c93-b90e-cd7606c80c6c";
 	}
 
 }

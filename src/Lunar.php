@@ -16,7 +16,7 @@ class Lunar
 	/**
 	 * @var string
 	 */
-	const BASE_URL = 'https://api.dev.lunarway.com/merchant-payments/v1';
+	const BASE_URL = 'https://api.prod.lunarway.com/merchant-payments/v1';
 
 	/**
 	 * @var HttpClientInterface
