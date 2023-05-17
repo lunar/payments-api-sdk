@@ -117,5 +117,24 @@ class Payments extends Endpoint
 		return $api_response->json;
 	}
 
+	public function refund($payment_id, $args)
+	{
+		$url = 'payments/' . $payment_id.'/refund';
+
+		$api_response = $this->lunar->client->request('POST', $url, $args);
+
+		return $api_response->json;
+	}
+
+
+	public function cancel($payment_id, $args)
+	{
+		$url = 'payments/' . $payment_id.'/cancel';
+
+		$api_response = $this->lunar->client->request('POST', $url, $args);
+
+		return $api_response->json;
+	}
+
 
 }
