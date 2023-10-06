@@ -38,7 +38,8 @@ $result = $lunar->payments()->fetch($payment_intent_id);
  
 // capture a transaction
 $payments = $lunar->payments();
-$transaction  = $payments->capture($transaction_id, [               'amount'   => [
+$transaction  = $payments->capture($transaction_id, [
+    'amount'   => [
         'decimal'=> '10',
         'currency' => 'EUR'
     ]
@@ -47,7 +48,8 @@ $transaction  = $payments->capture($transaction_id, [               'amount'   =
 
 // void a transaction
 $payments = $lunar->payments();
-$transaction  = $payments->cancel($transaction_id, [                'amount'   => [
+$transaction  = $payments->cancel($transaction_id, [
+    'amount'   => [
         'decimal'=> '10',
         'currency' => 'EUR'
     ]
@@ -56,7 +58,8 @@ $transaction  = $payments->cancel($transaction_id, [                'amount'   =
 
 // refund a transaction
 $payments = $lunar->payments();
-$transaction  = $payments->refund($transaction_id, [               'amount'   => [
+$transaction  = $payments->refund($transaction_id, [
+    'amount'   => [
         'decimal'=> '10',
         'currency' => 'EUR'
     ]
