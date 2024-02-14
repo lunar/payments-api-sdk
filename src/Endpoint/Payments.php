@@ -72,6 +72,23 @@ class Payments extends Endpoint
 		return $api_response->json;
 	}
 
+	/**
+	 *
+	 * @param $payment_id
+	 *
+	 * @return array
+	 */
+	public function updatePrefferedPaymentMethod($payment_id,$method)
+	{
+		$url = 'payments/' . $payment_id.'/intent/preferredPaymentMethod';
+
+		$api_response = $this->lunar->client->request('POST', $url, [
+			'preferredPaymentMethod' => $method
+		]);
+
+		return $api_response->json;
+	}
+
 	public function submit($payment_id, $args)
 	{
 		$url = 'payments/' . $payment_id.'/submit';
