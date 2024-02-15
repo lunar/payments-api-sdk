@@ -75,10 +75,11 @@ class Payments extends Endpoint
 	/**
 	 *
 	 * @param $payment_id
+	 * @param $method
 	 *
 	 * @return array
 	 */
-	public function updatePrefferedPaymentMethod($payment_id,$method)
+	public function updatePreferredPaymentMethod($payment_id, $method)
 	{
 		$url = 'payments/' . $payment_id.'/intent/preferredPaymentMethod';
 

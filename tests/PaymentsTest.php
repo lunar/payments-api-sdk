@@ -97,13 +97,13 @@ class PaymentsTest extends BaseTest
 
 	public function testUpdatePreferred()
 	{
-		$response = $this->payments->updatePrefferedPaymentMethod($this->payment_id,'card');
+		$response = $this->payments->updatePreferredPaymentMethod($this->payment_id,'card');
 
 		$payment = $this->payments->fetch($this->payment_id);
 
 		$this->assertEquals('card', $payment['preferredPaymentMethod']);
 
-		$response = $this->payments->updatePrefferedPaymentMethod($this->payment_id,'mobilePay');
+		$response = $this->payments->updatePreferredPaymentMethod($this->payment_id,'mobilePay');
 
 		$payment = $this->payments->fetch($this->payment_id);
 
